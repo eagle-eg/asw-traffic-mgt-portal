@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="platformTitle">Egyptian Traffic Services</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="/images/logo-asw-16.ico">
+    <link rel="icon" type="image/png" href="/images/logo-asw-32.ico">
+    <link rel="icon" type="image/png" href="/images/logo-asw-48.png">
+    <link rel="icon" type="image/png" href="/images/logo-asw.png">
+</head>
+
+<body>
+    <header class="bg-primary text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center" dir="rtl">
+                <!-- Logo image -->
+                <a href="./index.html">
+                    <img src="images/logo-asw.png" alt="Aswan Traffic Logo" style="height: 60px; margin-left: 15px;" />
+                </a>
+                <h1 data-lang-key="platformTitle" class="mb-0"
+                    style="line-height:1.2; font-weight:700; font-size:1.5rem;">
+                    ادارة مرور اسوان
+                </h1>
+            </div>
+            <div class="language-switcher">
+                <button class="btn btn-secondary" id="lang-en">English</button>
+                <button class="btn btn-secondary" id="lang-ar">العربية</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section text-center text-white d-flex align-items-center justify-content-cebter">
+            <div class="container">
+                <h2 class="display-4" data-lang-key="heroHeading">Your Guide to Traffic Procedures</h2>
+                <p class="lead" data-lang-key="heroSubheading">Understand requirements, documents, and steps before
+                    visiting the traffic office.</p>
+                <div class="mt-4">
+                    <a href="license-procedures.html" class="btn btn-secondary btn-lg mx-2"
+                        data-lang-key="btnLicenseProcedures">إجراءات التراخيص</a>
+                    <a href="complaints.html" class="btn btn-secondary btn-lg mx-2"
+                        data-lang-key="btnSubmitComplaint">تقديم اقتراح او شكوي</a>
+                    <a href="safety-first.html" class="btn btn-secondary btn-lg mx-2"
+                        data-lang-key="safetyFirstBtn">سلامتك أولا</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p data-lang-key="footerText">&copy; 2023 Egyptian Traffic Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

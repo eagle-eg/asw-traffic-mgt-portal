@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>License Procedures</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="/images/logo-asw-16.ico">
+    <link rel="icon" type="image/png" href="/images/logo-asw-32.ico">
+    <link rel="icon" type="image/png" href="/images/logo-asw-48.png">
+    <link rel="icon" type="image/png" href="/images/logo-asw.png">
+</head>
+
+<body>
+    <header class="bg-primary text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center" dir="rtl">
+                <!-- Logo image -->
+                <a href="./index.html">
+                    <img src="images/logo-asw.png" alt="Aswan Traffic Logo" style="height: 60px; margin-left: 15px;" />
+                </a>
+                <h1 data-lang-key="platformTitle" class="mb-0"
+                    style="line-height:1.2; font-weight:700; font-size:1.5rem;">
+                    ادارة مرور اسوان
+                </h1>
+            </div>
+            <div class="language-switcher">
+                <button class="btn btn-secondary" id="lang-en">English</button>
+                <button class="btn btn-secondary" id="lang-ar">العربية</button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container my-5">
+        <h2 class="text-center mb-4 text-primary" data-lang-key="btnLicenseProcedures">License Procedures</h2>
+        
+        
+        <!-- Step 1: Choose License Category -->
+        
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة إلى الصفحة الرئيسية</a>
+        <div id="category-selection" class="row justify-content-center  mb-5">
+
+            <!-- Driving License -->
+            <div class="col-12 col-md-5 mb-3 me-md-4 d-flex flex-column justify-content-center align-items-center bgpl"
+                style="height: 250px; border: 1px solid #ccc; border-radius: 5px;">
+                <img class="icolice mb-3" src="./images/hands.png" alt="">
+                <button id="btnDrivingLicense" class="btn btn-outline-primary w-75 py-3 fs-4"
+                    data-lang-key="drivingLicenseBtn">
+                    Driving License<br />رخصة قيادة
+                </button>
+            </div>
+
+            <!-- Vehicle License -->
+            <div class="col-12 col-md-5 mb-3 me-md-4 d-flex flex-column justify-content-center align-items-center bgpl" 
+                style="height: 250px; border: 1px solid #ccc; border-radius: 5px;">
+                <img class="icolice mb-3" src="./images/car.png" alt="">
+                <button id="btnVehicleLicense" class="btn btn-outline-primary w-75 py-3 fs-4"
+                    data-lang-key="vehicleLicenseBtn">
+                    Vehicle License<br />رخصة مركبة
+                </button>
+            </div>
+
+
+        </div>
+
+
+        <!-- Step 2: Choose Type -->
+        <div id="type-selection" class="d-none">
+            <h3 class="mb-4 text-primary" id="type-selection-title"></h3>
+            <div id="type-list" class="row g-3"></div>
+            <button id="btnBackToCategory" class="btn btn-secondary mt-4" data-lang-key="backBtn">Back</button>
+        </div>
+    </main>
+
+    <!-- Modal for Steps -->
+    <div class="modal fade" id="stepsModal" tabindex="-1" aria-labelledby="stepsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="stepsModalLabel"></h5>
+                    <button type="button" class="btn btn-outline-secondary me-2" id="printStepsBtn" title="Print Steps">
+                        <i class="fas fa-print"></i> <span data-lang-key="printBtn">Print</span>
+                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="stepsModalBody">
+                    <!-- Steps will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p data-lang-key="footerText">&copy; 2025 Egyptian Traffic Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/license-procedures.js"></script>
+</body>
+
+</html>

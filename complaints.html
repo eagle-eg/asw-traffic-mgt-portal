@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="btnSubmitComplaint">Submit a Complaint</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="/images/logo-asw-16.ico">
+    <link rel="icon" type="image/png" href="/images/logo-asw-32.ico">
+    <link rel="icon" type="image/png" href="/images/logo-asw-48.png">
+    <link rel="icon" type="image/png" href="/images/logo-asw.png">
+</head>
+
+<body>
+    <header class="bg-primary text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center" dir="rtl">
+                <!-- Logo image -->
+                <a href="./index.html">
+                    <img src="images/logo-asw.png" alt="Aswan Traffic Logo" style="height: 60px; margin-left: 15px;" />
+                </a>
+                <h1 data-lang-key="platformTitle" class="mb-0" style="line-height:1.2; font-weight:700; font-size:1.5rem;">
+                    ادارة مرور اسوان
+                </h1>
+            </div>
+            <div class="language-switcher">
+                <button class="btn btn-secondary" id="lang-en">English</button>
+                <button class="btn btn-secondary" id="lang-ar">العربية</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <h2 class="text-center mb-4 text-primary" data-lang-key="btnSubmitComplaint">Submit a Complaint</h2>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card p-4 shadow-sm">
+                    <form id="complaintForm">
+                        <div class="mb-3">
+                            <label for="complaintText" class="form-label" data-lang-key="complaintLabel">Your
+                                Complaint:</label>
+                            <textarea class="form-control" id="complaintText" rows="5" required
+                                placeholder="اكتب اقتراحك او الشكوي هنا.."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="citySelect" class="form-label" data-lang-key="cityLabel">Select City:</label>
+                            <select class="form-select" id="citySelect" required>
+                                <option value="" data-lang-key="selectCityPlaceholder">-- Select City --</option>
+                                <option value="Kom Ombo" data-lang-key="cityKomOmbo">Kom Ombo</option>
+                                <option value="Edfu" data-lang-key="cityEdfu">Edfu</option>
+                                <option value="Aswan" data-lang-key="cityAswan">Aswan</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary sentbtn w-100"
+                            data-lang-key="submitComplaintBtn">Submit Complaint</button>
+                    </form>
+                    <div id="successMessage" class="alert alert-success mt-3 d-none" role="alert"
+                        data-lang-key="complaintSuccess">
+                        Your complaint has been submitted successfully. Thank you for your feedback!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p data-lang-key="footerText">&copy; 2025 Egyptian Traffic Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/complaints.js"></script>
+</body>
+
+</html>
