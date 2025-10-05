@@ -2,7 +2,7 @@ const translations = {
     en: {
         platformTitle: "General Administration of Aswan Traffic",
         heroHeading: "Your comprehensive guide to licensing procedures",
-        heroSubheading: "Understand requirements, documents, and steps before visiting the traffic office.",
+        heroSubheading: "To save your time, know the documents and licensing steps before visiting the Traffic Department.",
         btnLicenseProcedures: "License Procedures",
         btnSubmitComplaint: "Submit a Complaint",
         btnAdminDashboard: "Traffic Manager Dashboard",
@@ -76,7 +76,7 @@ const translations = {
     ar: {
         platformTitle: "ادارة مرور اسوان",
         heroHeading: "دليلك الشامل لإجراءات التراخيص",
-        heroSubheading: "افهم المتطلبات والمستندات والخطوات قبل زيارة مكتب المرور.",
+        heroSubheading: "حرصا على وقتك اعرف المستندات وخطوات الترخيص قبل زيارتك لادارة المرور",
         btnLicenseProcedures: "إجراءات التراخيص",
         btnSubmitComplaint: "تقديم اقتراح او شكوى",
         btnAdminDashboard: "لوحة تحكم مدير المرور",
