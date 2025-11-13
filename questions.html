@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>أسئلة توعية مرورية - تفاعلي</title>
+    <style>
+        :root {
+            --bg: #f6fbff;
+            --card: #ffffff;
+            --accent: #0b74de;
+            --accent-dark: #075faa;
+            --safe: #2e8b57;
+            --danger: #d43d3d;
+            --muted: #6b7280
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Tahoma, "Segoe UI", Roboto, Arial;
+            background: linear-gradient(180deg, var(--bg), #eef6ff);
+            color: #073047
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 24px auto;
+            padding: 20px
+        }
+
+        header {
+            display: flex;
+            gap: 16px;
+            align-items: center
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 20px
+        }
+
+        p.lead {
+            margin: 6px 0 18px;
+            color: var(--muted)
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px
+        }
+
+        button {
+            background: var(--accent);
+            color: #fff;
+            border: 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        button.secondary {
+            background: #fff;
+            color: var(--accent);
+            border: 1px solid rgba(11, 116, 222, .15)
+        }
+
+        button.ghost {
+            background: transparent;
+            color: var(--accent);
+            border: 1px dashed rgba(11, 116, 222, .12)
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
+            box-shadow: 0 6px 18px rgba(10, 40, 80, .06)
+        }
+
+        .q-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .q-text {
+            font-size: 16px;
+            margin: 8px 0
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .opt {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #e6eef9;
+            cursor: pointer
+        }
+
+        .opt:hover {
+            background: #f3f9ff
+        }
+
+        .opt.correct {
+            background: rgba(46, 139, 87, 0.08);
+            border-color: rgba(46, 139, 87, 0.25)
+        }
+
+        .opt.wrong {
+            background: rgba(212, 61, 61, 0.06);
+            border-color: rgba(212, 61, 61, 0.18)
+        }
+
+        .explain {
+            margin-top: 8px;
+            color: #1f2937;
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 4px solid rgba(11, 116, 222, .12);
+            display: none
+        }
+
+        .explain.show {
+            display: block
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 18px
+        }
+
+        .score {
+            font-weight: 700
+        }
+
+        /* responsive */
+        @media(max-width:520px) {
+            .wrap {
+                padding: 12px
+            }
+
+            button {
+                padding: 8px 10px
+            }
+        }
+
+        /* print */
+        @media print {
+            body {
+                background: #fff
+            }
+
+            button,
+            .controls,
+            footer {
+                display: none
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <div>
+                <h1>أسئلة التوعية المرورية</h1>
+                <p class="lead">اختبر معلوماتك بسرعة — اضغط على الإجابة لرؤية الشرح. مناسب للمدارس والمجتمع.</p>
+            </div>
+        </header>
+
+        <div class="controls">
+            <button id="checkAll">اظهر الإجابات والشرح</button>
+            <button id="reset" class="secondary">إعادة تعيين</button>
+            <button id="print" class="ghost">طباعة الصفحة</button>
+            <div style="margin-inline-start:auto;display:flex;gap:8px;align-items:center">
+                <span class="score">النتيجة: <span id="scoreVal">0</span>/<span id="totalQ">0</span></span>
+            </div>
+        </div>
+
+        <main id="questions"></main>
+
+        <footer>
+            <div style="color:var(--muted);font-size:13px">ادارة مرور أسوان</div>
+        </footer>
+    </div>
+
+    <script>
+        const data = [
+            {
+                id: 1, topic: 'السرعة', type: 'mc', q: 'لماذا السرعة الزائدة خطيرة؟', opts: [
+                    { t: 'تزيد متعة الرحلة', c: false },
+                    { t: 'تقلل القدرة على التوقف وتزيد قوة الحادث', c: true },
+                    { t: 'تقلل استهلاك الوقود فقط', c: false }
+                ], ex: 'السرعة تقلل الوقت المتاح للتوقف وتزيد شدة الاصطدام.'
+            },
+
+            {
+                id: 2, topic: 'السرعة', type: 'mc', q: 'هل السرعة العالية توفر وقتًا كثيرًا؟', opts: [
+                    { t: 'نعم وتستحق المخاطرة', c: false },
+                    { t: 'لا، توفر دقائق قليلة لكنها قد تكلف حياة', c: true }
+                ], ex: 'الزمن الموفر قليل مقارنة بالمخاطرة المحتملة.'
+            },
+
+            {
+                id: 3, topic: 'السرعة', type: 'mc', q: 'ما السرعة المناسبة داخل الأحياء؟', opts: [
+                    { t: 'أكثر من 100 كم/س', c: false },
+                    { t: 'أقل من 60 كم/س ويفضل أقل من 40', c: true },
+                    { t: 'لا يوجد حد', c: false }
+                ], ex: 'سرعات منخفضة تحمي المشاة والأطفال.'
+            },
+
+            {
+                id: 4, topic: 'تجاوز', type: 'mc', q: 'متى يكون التجاوز خطيرًا؟', opts: [
+                    { t: 'عند المنعطفات والتلال والأماكن ذات رؤية ضعيفة', c: true },
+                    { t: 'على طريق مستقيم وواضح فقط', c: false }
+                ], ex: 'الرؤية المحدودة تجعل التجاوز عرضة للاصطدام.'
+            },
+
+            {
+                id: 5, topic: 'تجاوز', type: 'mc', q: 'قبل أن تتجاوز سيارة أمامك ماذا تفعل؟', opts: [
+                    { t: 'تضغط على الغاز فقط', c: false },
+                    { t: 'تأكد أن الطريق فاضي، استخدم الإشارة وأنظر في المرايا', c: true }
+                ], ex: 'التحقق والإشارة يمنع مفاجآت واصطدامات.'
+            },
+
+            {
+                id: 6, topic: 'فحص', type: 'mc', q: 'ما المقصود بالصلاحية الفنية للسيارة؟', opts: [
+                    { t: 'مظهر السيارة الخارجي', c: false },
+                    { t: 'فرامل، إطارات، أنوار، ومساحات تعمل جيدًا', c: true }
+                ], ex: 'الصلاحية الفنية تضم كل ما يؤثر على سلامة التشغيل.'
+            },
+
+            {
+                id: 7, topic: 'فحص', type: 'mc', q: 'ماذا تفعل لو الإطار مهترئ أو نقص الهواء؟', opts: [
+                    { t: 'تكمل القيادة بسرعة', c: false },
+                    { t: 'توقف وراجع مركز الصيانة فورًا', c: true }
+                ], ex: 'إطار غير صالح يزيد خطر الانفجار وفقدان التحكم.'
+            },
+
+            {
+                id: 8, topic: 'مخدرات', type: 'mc', q: 'هل يمكن القيادة بعد تناول مخدر أو دواء مهدئ؟', opts: [
+                    { t: 'نعم إذا كانت الجرعة صغيرة', c: false },
+                    { t: 'لا، لأنها تقلل التركيز وتبطئ رد الفعل', c: true }
+                ], ex: 'أي مادة تؤثر على اليقظة تقلل قدرة القيادة.'
+            },
+
+            {
+                id: 9, topic: 'مخدرات', type: 'mc', q: 'ما خطورة قيادة تحت تأثير المخدرات؟', opts: [
+                    { t: 'خطيرة جدًا وقد تؤدي لحوادث ووفيات', c: true },
+                    { t: 'ليست مشكلة إن كان السائق خبيرًا', c: false }
+                ], ex: 'المخدرات تغير الحكم والقدرة على الاستجابة.'
+            },
+
+            {
+                id: 10, topic: 'مواقف', type: 'mc', q: 'رأيت سيارة إسعاف تقترب من الخلف، ماذا تفعل؟', opts: [
+                    { t: 'تستمر دون تغيير', c: false },
+                    { t: 'تنحرف بهدوء إلى الجانب وتفتح لها الطريق', c: true }
+                ], ex: 'إفساح المجال للمركبات الطارئة ينقذ أرواحًا.'
+            }
+        ];
+
+        const container = document.getElementById('questions');
+        const totalQ = document.getElementById('totalQ');
+        const scoreVal = document.getElementById('scoreVal');
+        totalQ.textContent = data.length;
+
+        let answered = {};
+
+        function createCard(item) {
+            const card = document.createElement('section');
+            card.className = 'card';
+            card.id = 'q-' + item.id;
+
+            const head = document.createElement('div'); head.className = 'q-head';
+            const t = document.createElement('div'); t.textContent = `(${item.topic}) سؤال ${item.id}`;
+            const showBtn = document.createElement('button'); showBtn.textContent = 'أظهر الإجابة'; showBtn.className = 'secondary';
+            showBtn.onclick = () => revealAnswer(item.id);
+            head.appendChild(t); head.appendChild(showBtn);
+
+            const qText = document.createElement('div'); qText.className = 'q-text'; qText.textContent = item.q;
+
+            const opts = document.createElement('div'); opts.className = 'options';
+            item.opts.forEach((o, idx) => {
+                const op = document.createElement('div'); op.className = 'opt'; op.setAttribute('data-idx', idx);
+                op.innerHTML = `<span style="font-weight:600">${String.fromCharCode(65 + idx)}.</span><span style="flex:1">${o.t}</span>`;
+                op.onclick = () => selectOpt(item.id, idx);
+                opts.appendChild(op);
+            });
+
+            const explain = document.createElement('div'); explain.className = 'explain'; explain.id = 'ex-' + item.id; explain.innerHTML = `<strong>الشرح:</strong> ${item.ex}`;
+
+            card.appendChild(head); card.appendChild(qText); card.appendChild(opts); card.appendChild(explain);
+            return card;
+        }
+
+        function render() {
+            container.innerHTML = '';
+            data.forEach(d => container.appendChild(createCard(d)));
+        }
+
+        function selectOpt(qid, idx) {
+            const item = data.find(x => x.id === qid);
+            if (!item) return;
+            if (answered[qid]) return; // منع إعادة الاختيار
+
+            const card = document.getElementById('q-' + qid);
+            const opts = card.querySelectorAll('.opt');
+            opts.forEach((el, i) => {
+                el.classList.remove('correct', 'wrong');
+                el.style.pointerEvents = 'none';
+                if (item.opts[i].c) {
+                    el.classList.add('correct');
+                }
+            });
+
+            const chosen = opts[idx];
+            if (!item.opts[idx].c) {
+                chosen.classList.add('wrong');
+            }
+
+            answered[qid] = item.opts[idx].c ? 'correct' : 'wrong';
+            updateScore();
+            document.getElementById('ex-' + qid).classList.add('show');
+        }
+
+        function revealAnswer(qid) {
+            const item = data.find(x => x.id === qid);
+            const card = document.getElementById('q-' + qid);
+            const opts = card.querySelectorAll('.opt');
+            opts.forEach((el, i) => {
+                el.style.pointerEvents = 'none';
+                if (item.opts[i].c) el.classList.add('correct');
+            });
+            answered[qid] = 'revealed';
+            document.getElementById('ex-' + qid).classList.add('show');
+            updateScore();
+        }
+
+        function updateScore() {
+            let correct = 0;
+            let counted = 0;
+            data.forEach(d => {
+                if (answered[d.id] === 'correct') { correct++; counted++; }
+                else if (answered[d.id] === 'wrong') { counted++; }
+                else if (answered[d.id] === 'revealed') {/* revealed not count as correct */ counted++; }
+            });
+            scoreVal.textContent = correct;
+        }
+
+        document.getElementById('checkAll').addEventListener('click', () => {
+            data.forEach(d => {
+                const card = document.getElementById('q-' + d.id);
+                const opts = card.querySelectorAll('.opt');
+                opts.forEach((el, i) => { el.style.pointerEvents = 'none'; if (d.opts[i].c) el.classList.add('correct'); });
+                document.getElementById('ex-' + d.id).classList.add('show');
+                answered[d.id] = 'revealed';
+            });
+            updateScore();
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            answered = {}; scoreVal.textContent = '0';
+            render();
+        });
+
+        document.getElementById('print').addEventListener('click', () => window.print());
+
+        // initial render
+        render();
+    </script>
+</body>
+
+</html>
